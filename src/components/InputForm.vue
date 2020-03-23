@@ -14,20 +14,20 @@
       <div class="form-group row">
         <label class="col-4 col-form-label text-secondary">電話番号</label>
         <div class="col-8">
-          <input type="text" class="form-control" v-model="data.tel" placeholder="08012345678">
+          <input type="text" class="form-control" id="inputTel" v-model="data.tel" placeholder="08012345678">
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-3 col-form-label text-secondary">時間</label>
         <div class="col-4">
-          <select class="form-control" v-model="data.startTime">
+          <select id="inputStart" class="form-control" v-model="data.startTime">
             <option v-for="(time, ti) in startTimes" :key="ti">{{ time }}</option>
           </select>
         </div>
         <label class="col-1 col-form-label">~</label>
         <div class="col-4">
-          <select class="form-control" v-model="data.endTime">
+          <select id="inputEnd" class="form-control" v-model="data.endTime">
             <option v-for="(time, ti) in endTimes" :key="ti">{{ time }}</option>
           </select>
         </div>
