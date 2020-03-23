@@ -1,3 +1,4 @@
+liff.init();
 window.onload = function(e) {
   // sendにclickイベントを追加
   document.getElementById('send').addEventListener('click', function() {
