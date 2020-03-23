@@ -10,7 +10,7 @@ window.onload = function(e) {
     var year = getParam('year');
     var month = getParam('month');
     var date = getParam('date');
-    const text = '予約します。\n' + name + '\n' + tel + '\n' + year + '年' + month + '月' + '日\n' + start + '~' + end;
+    const text = '予約します。\n' + name + '\n' + tel + '\n' + year + '年' + month + '月' + date + '日\n' + start + '~' + end;
     liff
       .sendMessages([
         {
