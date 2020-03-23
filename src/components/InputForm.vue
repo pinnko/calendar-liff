@@ -1,10 +1,40 @@
 <template>
   <div class="container">
     <!-- 親のpropsを受け取る -->
-    <h1 class="text-center pb-2">{{ttl}}</h1>
+    <h1 class="h5 text-center pb-2">{{ttl}}</h1>
     <!-- submitイベントを無効に -->
     <form @submit.prevent="">
-      あああ
+      <div class="form-group row">
+        <label class="col-4 col-form-label text-secondary">保護者氏名</label>
+        <div class="col-8">
+          <input type="text" id="inputName" class="form-control" v-model="data.name" placeholder="山田 花子">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label text-secondary">電話番号</label>
+        <div class="col-8">
+          <input type="text" class="form-control" v-model="data.tel" placeholder="08012345678">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-3 col-form-label text-secondary">時間</label>
+        <div class="col-4">
+          <select class="form-control" v-model="data.startTime">
+            <option v-for="(time, ti) in startTimes" :key="ti">{{ time }}</option>
+          </select>
+        </div>
+        <label class="col-1 col-form-label">~</label>
+        <div class="col-4">
+          <select class="form-control" v-model="data.endTime">
+            <option v-for="(time, ti) in endTimes" :key="ti">{{ time }}</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-success btn-block" id="send" type="submit">申し込む</button>
+
     </form>
   </div>
 </template>
@@ -19,59 +49,22 @@
       return {
         data: {
           name: '',
-          reason: '',
-          reason_other: '',
-          schedule: '',
-          time1: '',
-          time2: '',
-          message: '',
+          tel: '',
+          startTime: '',
+          endTime: '',
         },
-        // 遅刻理由の中身
-        reasons: ['電車遅延', '体調不良', '忘れ物', 'その他'],
-        // 種別の中身
-        types: ['遅刻します', '全休をいただきます', '午前休をいただきます', '午後休をいただきます'],
-        // メッセージのテンプレート
-        text1: 'おはようございます。',
-        text2: 'よろしくお願いします。'
+        startTimes: ['8:00', '9:00'],
+        endTimes: ['9:00', '10:00']
       };
     },
     methods: {
-      // 時間のオプションを配列で生成
-      createTimes: function(init, to) {
-        const times = [];
-        for (let index = init; index < to; index++) {
-          times.push(`${index * 5}分`);
-        }
-        return times;
-      },
-      // inputに変更があった場合にメッセージの作成
-      createMessage: function() {
-        let text, text_reson, text_schedule
 
-        // その他の場合は、reason_otherのデータを使用
-        if (this.data.reason == "その他") {
-          text_reson = this.data.reason_other
-        } else {
-          text_reson = this.data.reason
-        }
-
-        // 遅刻の場合は時間に入力した時間を使用して生成
-        if (this.data.schedule == "遅刻します") {
-          text_schedule = `${this.data.time1}～${this.data.time2}ほど${this.data.schedule}`
-        } else {
-          text_schedule = this.data.schedule
-        }
-
-        // メッセージを生成
-        text = `${this.text1}${this.data.name}です。${text_reson}のため${text_schedule}。${this.text2}`;
-
-        // データに渡す
-        this.data.message = text;
-      },
     }
   };
 </script>
 
 <style>
-
+::placeholder {
+  color: #ccc;
+}
 </style>

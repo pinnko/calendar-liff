@@ -13,7 +13,7 @@ export default {
   },
   data() {
     return {
-      title: 'ご利用情報入力'
+      title: 'ご利用情報を入力してください'
     }
   }
 }
