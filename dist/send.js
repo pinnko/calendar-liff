@@ -7,7 +7,10 @@ window.onload = function(e) {
     var tel = document.getElementById('inputTel').value;
     var start = document.getElementById('inputStart').value;
     var end = document.getElementById('inputEnd').value;
-    const text = name + '\n' + tel + '\n' + start + '~' + end;
+    var year = getParam('year');
+    var month = getParam('month');
+    var date = getParam('date');
+    const text = '予約します。\n' + name + '\n' + tel + '\n' + year + '年' + month + '月' + '日\n' + start + '~' + end;
     liff
       .sendMessages([
         {
@@ -16,7 +19,7 @@ window.onload = function(e) {
         }
       ])
       .then(function() {
-        window.alert('送信完了');
+        // window.alert('送信完了');
         // aleartでOKを押すと、自動でLIFFウィンドウが閉じる
         liff.closeWindow();
       })
@@ -25,3 +28,13 @@ window.onload = function(e) {
       });
   });
 };
+
+function getParam(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
